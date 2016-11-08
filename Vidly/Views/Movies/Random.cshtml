@@ -4,5 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";       //Layout for this view
 }
 
-<h2>@Model.Movie.Name</h2>
-@Model.Customers
+@{ 
+    var className = Model.Customers.Count > 0 ? "popular" : null;
+}
+
+<h2 class="@className">@Model.Movie.Name</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <text>First rental of this movie!!!</text>      //Not standard HTML element but Razon ViewModel understands it
+}
+else
+{
+    <ul>
+        @foreach (var customer in Model.Customers)
+        {
+            <li>@customer.Name</li>
+        }
+    </ul>
+}
+
